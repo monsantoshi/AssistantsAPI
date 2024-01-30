@@ -47,9 +47,20 @@ def upload_to_openai(filepath):
 
 # Create a sidebar for API key configuration and additional features
 st.sidebar.header("Configuration")
-api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
-if api_key:
-    openai.api_key = api_key
+with st.sidebar:
+    st.title('🤖💬 DM AI Chatbot')
+    if 'OPENAI_API_KEY' in st.secrets:
+        st.success('API key already provided!', icon='✅')
+        openai.api_key = st.secrets['OPENAI_API_KEY']
+    else:
+        openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
+        if not (openai.api_key.startswith('sk-') and len(openai.api_key)==51):
+            st.warning('Please enter your credentials!', icon='⚠️')
+        else:
+            st.success('Proceed to entering your prompt message!', icon='👉')
+# api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
+# if api_key:
+#     openai.api_key = api_key
 
 # Additional features in the sidebar for web scraping and file uploading
 st.sidebar.header("Additional Features")

@@ -99,17 +99,23 @@ with st.sidebar:
 #             file_id=file_id
 #         )
 
-# Button to start the chat session
-if st.sidebar.button("Start Chat"):
-    # Check if files are uploaded before starting chat
-    if st.session_state.file_id_list:
-        st.session_state.start_chat = True
-        # Create a thread once and store its ID in session state
-        thread = client.beta.threads.create()
-        st.session_state.thread_id = thread.id
-        st.write("thread id: ", thread.id)
-    else:
-        st.sidebar.warning("Please upload at least one file to start the chat.")
+# #Button to start the chat session
+# if st.sidebar.button("Start Chat"):
+#     # Check if files are uploaded before starting chat
+#     if st.session_state.file_id_list:
+#         st.session_state.start_chat = True
+#         # Create a thread once and store its ID in session state
+#         thread = client.beta.threads.create()
+#         st.session_state.thread_id = thread.id
+#         st.write("thread id: ", thread.id)
+#     else:
+#         st.sidebar.warning("Please upload at least one file to start the chat.")
+
+st.session_state.start_chat = True
+# Create a thread once and store its ID in session state
+thread = client.beta.threads.create()
+st.session_state.thread_id = thread.id
+st.write("thread id: ", thread.id)
 
 # Define the function to process messages with citations
 def process_message_with_citations(message):

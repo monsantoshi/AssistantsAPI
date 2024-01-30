@@ -140,7 +140,7 @@ def process_message_with_citations(message):
 
 
 # Main chat interface setup
-st.title("OpenAI Assistants API Chat")
+st.title("🤖💬DM AI Chatbot")
 st.write("This is a simple chat application that uses OpenAI's API to generate responses.")
 
 # Only show the chat interface if the chat has been started

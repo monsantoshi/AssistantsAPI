@@ -62,42 +62,42 @@ with st.sidebar:
 # if api_key:
 #     openai.api_key = api_key
 
-# Additional features in the sidebar for web scraping and file uploading
-st.sidebar.header("Additional Features")
-website_url = st.sidebar.text_input("Enter a website URL to scrape and organize into a PDF", key="website_url")
+# # Additional features in the sidebar for web scraping and file uploading
+# st.sidebar.header("Additional Features")
+# website_url = st.sidebar.text_input("Enter a website URL to scrape and organize into a PDF", key="website_url")
 
-# Button to scrape a website, convert to PDF, and upload to OpenAI
-if st.sidebar.button("Scrape and Upload"):
-    # Scrape, convert, and upload process
-    scraped_text = scrape_website(website_url)
-    pdf_path = text_to_pdf(scraped_text, "scraped_content.pdf")
-    file_id = upload_to_openai(pdf_path)
-    st.session_state.file_id_list.append(file_id)
-    #st.sidebar.write(f"File ID: {file_id}")
+# # Button to scrape a website, convert to PDF, and upload to OpenAI
+# if st.sidebar.button("Scrape and Upload"):
+#     # Scrape, convert, and upload process
+#     scraped_text = scrape_website(website_url)
+#     pdf_path = text_to_pdf(scraped_text, "scraped_content.pdf")
+#     file_id = upload_to_openai(pdf_path)
+#     st.session_state.file_id_list.append(file_id)
+#     #st.sidebar.write(f"File ID: {file_id}")
 
-# Sidebar option for users to upload their own files
-uploaded_file = st.sidebar.file_uploader("Upload a file to OpenAI embeddings", key="file_uploader")
+# # Sidebar option for users to upload their own files
+# uploaded_file = st.sidebar.file_uploader("Upload a file to OpenAI embeddings", key="file_uploader")
 
-# Button to upload a user's file and store the file ID
-if st.sidebar.button("Upload File"):
-    # Upload file provided by user
-    if uploaded_file:
-        with open(f"{uploaded_file.name}", "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        additional_file_id = upload_to_openai(f"{uploaded_file.name}")
-        st.session_state.file_id_list.append(additional_file_id)
-        st.sidebar.write(f"Additional File ID: {additional_file_id}")
+# # Button to upload a user's file and store the file ID
+# if st.sidebar.button("Upload File"):
+#     # Upload file provided by user
+#     if uploaded_file:
+#         with open(f"{uploaded_file.name}", "wb") as f:
+#             f.write(uploaded_file.getbuffer())
+#         additional_file_id = upload_to_openai(f"{uploaded_file.name}")
+#         st.session_state.file_id_list.append(additional_file_id)
+#         st.sidebar.write(f"Additional File ID: {additional_file_id}")
 
-# Display all file IDs
-if st.session_state.file_id_list:
-    st.sidebar.write("Uploaded File IDs:")
-    for file_id in st.session_state.file_id_list:
-        st.sidebar.write(file_id)
-        # Associate files with the assistant
-        assistant_file = client.beta.assistants.files.create(
-            assistant_id=assistant_id, 
-            file_id=file_id
-        )
+# # Display all file IDs
+# if st.session_state.file_id_list:
+#     st.sidebar.write("Uploaded File IDs:")
+#     for file_id in st.session_state.file_id_list:
+#         st.sidebar.write(file_id)
+#         # Associate files with the assistant
+#         assistant_file = client.beta.assistants.files.create(
+#             assistant_id=assistant_id, 
+#             file_id=file_id
+#         )
 
 # Button to start the chat session
 if st.sidebar.button("Start Chat"):
@@ -147,7 +147,7 @@ st.write("This is a simple chat application that uses OpenAI's API to generate r
 if st.session_state.start_chat:
     # Initialize the model and messages list if not already in session state
     if "openai_model" not in st.session_state:
-        st.session_state.openai_model = "gpt-4-1106-preview"
+        st.session_state.openai_model = "gpt-3.5-turbo-1106"
     if "messages" not in st.session_state:
         st.session_state.messages = []
 

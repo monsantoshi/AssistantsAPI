@@ -115,7 +115,7 @@ st.session_state.start_chat = True
 # Create a thread once and store its ID in session state
 thread = client.beta.threads.create()
 st.session_state.thread_id = thread.id
-st.write("thread id: ", thread.id)
+#st.write("thread id: ", thread.id)
 
 # Define the function to process messages with citations
 def process_message_with_citations(message):
